@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>Cleaning Bookings</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><h1 id="title">Bookings</h1></header>
+
+<main>
+  <!-- Screen 1: bookings list -->
+  <section id="screen-list" class="screen active">
+    <div class="tools">
+      <input id="search" type="search" placeholder="Search client or service" aria-label="Search">
+      <select id="filter" aria-label="Filter by status">
+        <option>All</option><option>Pending</option><option>Confirmed</option><option>Completed</option><option>Cancelled</option>
+      </select>
+    </div>
+    <ul id="list" class="cards"></ul>
+    <p id="empty" class="empty" hidden>No bookings yet. Tap <b>+ Add</b> to create one, or load sample data from the Summary screen.</p>
+  </section>
+
+  <!-- Screen 2: add / edit form -->
+  <section id="screen-form" class="screen">
+    <form id="form" novalidate>
+      <input type="hidden" id="f-id">
+      <label>Client name
+        <input id="f-client" type="text" autocomplete="off" placeholder="e.g. Grace Nakato">
+        <small class="err" id="e-client"></small></label>
+      <label>Phone number
+        <input id="f-phone" type="tel" placeholder="e.g. 0772000000">
+        <small class="err" id="e-phone"></small></label>
+      <label>Service
+        <select id="f-service"></select>
+        <small class="err" id="e-service"></small></label>
+      <label>Service date
+        <input id="f-date" type="date">
+        <small class="err" id="e-date"></small></label>
+      <label>Charge (UGX)
+        <input id="f-charge" type="text" inputmode="decimal" placeholder="e.g. 50000">
+        <small class="err" id="e-charge"></small></label>
+      <label>Booking status
+        <select id="f-status"></select>
+        <small class="err" id="e-status"></small></label>
+      <div class="row">
+        <button type="submit" class="btn primary" id="save">Save booking</button>
+        <button type="button" class="btn" id="cancel">Cancel</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Screen 3: summary -->
+  <section id="screen-summary" class="screen">
+    <div class="hero">
+      <span>Expected earnings</span>
+      <strong id="s-expected">UGX 0</strong>
+      <em>Pending + Confirmed bookings</em>
+    </div>
+    <div class="grid">
+      <div class="stat"><span>Earned (completed)</span><strong id="s-earned">UGX 0</strong></div>
+      <div class="stat"><span>Total bookings</span><strong id="s-total">0</strong></div>
+      <div class="stat"><span>Pending</span><strong id="s-pending">0</strong></div>
+      <div class="stat"><span>Confirmed</span><strong id="s-confirmed">0</strong></div>
+      <div class="stat"><span>Completed</span><strong id="s-completed">0</strong></div>
+      <div class="stat"><span>Cancelled</span><strong id="s-cancelled">0</strong></div>
+    </div>
+    <p class="note">Cancelled bookings are not counted in earnings.</p>
+    <div class="row">
+      <button class="btn" id="sample">Load sample data</button>
+      <button class="btn danger" id="clear">Clear all data</button>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status"></div>
+
+<nav class="tabs">
+  <button data-go="list" class="tab active">Bookings</button>
+  <button data-go="form" class="tab" id="tab-add">+ Add</button>
+  <button data-go="summary" class="tab">Summary</button>
+</nav>
+
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
